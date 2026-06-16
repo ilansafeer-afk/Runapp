@@ -1,0 +1,25 @@
+name: Generate Run App APK
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository Code
+        uses: actions/checkout@v4
+
+      - name: Build Web to APK
+        uses: lowcarbrob/action-home-app@v1.1
+        with:
+          app-name: "RunApp"
+          activity-name: "MainActivity"
+          package-name: "com.ilansafeer.runapp"
+
+      - name: Save APK File
+        uses: actions/upload-artifact@v4
+        with:
+          name: Run-App-APK
+          path: ./*.apk
