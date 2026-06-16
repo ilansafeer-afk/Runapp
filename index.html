@@ -1,0 +1,1878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>100KM Ultra Marathon Training Plan</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Barlow+Condensed:wght@700;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --white: #ffffff;
+    --off-white: #f8f8f6;
+    --light-gray: #f0efed;
+    --mid-gray: #e2e0dc;
+    --text-gray: #888;
+    --text-dark: #1a1a1a;
+    --text-mid: #444;
+    --accent: #e85d2f;
+    --accent-light: #fff2ee;
+    --accent-dark: #c44a20;
+    --green: #2d7a4f;
+    --green-light: #edf7f2;
+    --blue: #1e5fa8;
+    --blue-light: #edf3fc;
+    --purple: #7c3aed;
+    --purple-light: #f3eeff;
+    --gold: #c9920a;
+    --gold-light: #fdf6e3;
+  }
+
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--text-dark); font-size: 14px; line-height: 1.6; }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,255,255,0.96); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--mid-gray);
+    display: flex; gap: 0; overflow-x: auto;
+  }
+  nav a {
+    display: block; padding: 14px 20px; font-size: 11px; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;
+    color: var(--text-gray); white-space: nowrap; border-bottom: 2px solid transparent;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  nav a:hover, nav a.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* HERO */
+  .hero {
+    background: var(--white);
+    padding: 60px 40px 48px;
+    border-bottom: 1px solid var(--mid-gray);
+    text-align: center;
+  }
+  .hero-eyebrow {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--text-gray); margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(80px, 18vw, 180px); font-weight: 900; line-height: 0.9;
+    color: var(--accent); letter-spacing: -2px;
+  }
+  .hero-sub {
+    font-size: 13px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--text-mid); margin-top: 14px; margin-bottom: 36px;
+  }
+  .hero-stats {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 1px;
+    border: 1px solid var(--mid-gray); max-width: 800px; margin: 0 auto;
+  }
+  .hero-stat {
+    flex: 1; min-width: 130px; padding: 20px 16px;
+    border-right: 1px solid var(--mid-gray); text-align: center;
+  }
+  .hero-stat:last-child { border-right: none; }
+  .stat-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 38px; font-weight: 900; color: var(--text-dark); line-height: 1;
+  }
+  .stat-label { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-gray); margin-top: 4px; }
+
+  /* PROGRESS BAR */
+  .progress-section { padding: 32px 40px; background: var(--off-white); border-bottom: 1px solid var(--mid-gray); }
+  .progress-label { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-gray); margin-bottom: 10px; }
+  .progress-bar-wrap { position: relative; height: 8px; background: var(--mid-gray); border-radius: 4px; }
+  .progress-bar-fill { height: 100%; border-radius: 4px; background: linear-gradient(90deg, var(--green) 0%, var(--accent) 100%); }
+  .progress-markers { display: flex; justify-content: space-between; margin-top: 8px; }
+  .progress-markers span { font-size: 11px; color: var(--text-gray); }
+
+  /* PAGE SECTIONS */
+  .page-section { padding: 0; }
+  .section-header {
+    padding: 48px 40px 32px;
+    border-bottom: 1px solid var(--mid-gray);
+    display: flex; align-items: baseline; gap: 16px;
+  }
+  .section-header h2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 44px; font-weight: 900; line-height: 1; text-transform: uppercase;
+  }
+  .section-header .phase-badge {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 4px 10px; border-radius: 3px;
+  }
+
+  /* PHASE COLORS */
+  .phase-1 .section-header h2 { color: var(--green); }
+  .phase-1 .phase-badge { background: var(--green-light); color: var(--green); }
+  .phase-2 .section-header h2 { color: var(--blue); }
+  .phase-2 .phase-badge { background: var(--blue-light); color: var(--blue); }
+  .phase-3 .section-header h2 { color: var(--accent); }
+  .phase-3 .phase-badge { background: var(--accent-light); color: var(--accent); }
+  .phase-4 .section-header h2 { color: var(--purple); }
+  .phase-4 .phase-badge { background: var(--purple-light); color: var(--purple); }
+
+  /* LEGEND */
+  .legend {
+    display: flex; gap: 20px; flex-wrap: wrap;
+    padding: 14px 40px; background: var(--off-white); border-bottom: 1px solid var(--mid-gray);
+  }
+  .legend-item { display: flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 600; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+
+  /* WEEK */
+  .week-block { border-bottom: 1px solid var(--mid-gray); }
+  .week-header {
+    padding: 18px 40px; background: var(--off-white);
+    display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 1px solid var(--mid-gray);
+  }
+  .week-header h3 { font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-mid); }
+  .week-total { font-size: 13px; font-weight: 700; color: var(--text-dark); }
+  .week-total span { font-size: 11px; font-weight: 500; color: var(--text-gray); }
+
+  /* DAYS GRID */
+  .days-grid { display: grid; grid-template-columns: repeat(7, 1fr); }
+  .day-card {
+    padding: 16px 14px; border-right: 1px solid var(--mid-gray);
+    min-height: 140px; position: relative;
+  }
+  .day-card:last-child { border-right: none; }
+  .day-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-gray); margin-bottom: 8px; }
+  .day-type {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 2px 7px; border-radius: 2px; display: inline-block; margin-bottom: 8px;
+  }
+  .day-km { font-family: 'Barlow Condensed', sans-serif; font-size: 26px; font-weight: 900; line-height: 1; margin-bottom: 4px; }
+  .day-pace { font-size: 11px; color: var(--text-gray); margin-bottom: 6px; }
+  .day-note { font-size: 11px; color: var(--text-mid); line-height: 1.45; }
+
+  /* DAY TYPE STYLES */
+  .type-rest .day-type { background: var(--light-gray); color: var(--text-gray); }
+  .type-rest .day-km { color: var(--text-gray); }
+  .type-easy .day-type { background: var(--green-light); color: var(--green); }
+  .type-easy .day-km { color: var(--green); }
+  .type-long .day-type { background: var(--accent-light); color: var(--accent); }
+  .type-long .day-km { color: var(--accent); }
+  .type-b2b .day-type { background: var(--purple-light); color: var(--purple); }
+  .type-b2b .day-km { color: var(--purple); }
+  .type-taper .day-type { background: var(--gold-light); color: var(--gold); }
+  .type-taper .day-km { color: var(--gold); }
+  .type-race .day-type { background: var(--accent); color: white; }
+  .type-race .day-km { color: var(--accent); }
+  .type-strides .day-type { background: var(--blue-light); color: var(--blue); }
+  .type-strides .day-km { color: var(--blue); }
+
+  /* INFO BOXES */
+  .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--mid-gray); border-top: 1px solid var(--mid-gray); }
+  .info-box { background: var(--white); padding: 28px 32px; }
+  .info-box h4 { font-size: 13px; font-weight: 700; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.08em; }
+  .info-box p, .info-box li { font-size: 13px; color: var(--text-mid); line-height: 1.6; }
+  .info-box ul { padding-left: 16px; }
+  .info-box li { margin-bottom: 4px; }
+
+  /* PHASE OVERVIEW BAND */
+  .phase-band {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    border-bottom: 1px solid var(--mid-gray);
+  }
+  .phase-band-item {
+    padding: 20px 24px; border-right: 1px solid var(--mid-gray);
+    border-top: 3px solid transparent;
+  }
+  .phase-band-item:last-child { border-right: none; }
+  .phase-band-item.p1 { border-top-color: var(--green); }
+  .phase-band-item.p2 { border-top-color: var(--blue); }
+  .phase-band-item.p3 { border-top-color: var(--accent); }
+  .phase-band-item.p4 { border-top-color: var(--purple); }
+  .pbi-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-gray); margin-bottom: 4px; }
+  .pbi-title { font-size: 15px; font-weight: 700; color: var(--text-dark); margin-bottom: 2px; }
+  .pbi-sub { font-size: 12px; color: var(--text-gray); }
+
+  /* GENERIC CONTENT SECTION */
+  .content-section { padding: 40px; border-bottom: 1px solid var(--mid-gray); }
+  .content-section h2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 36px; font-weight: 900; text-transform: uppercase; margin-bottom: 24px;
+  }
+  .content-section h3 { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px; margin-top: 24px; }
+  .content-section p { font-size: 13px; color: var(--text-mid); line-height: 1.7; margin-bottom: 12px; }
+  .content-section ul { padding-left: 18px; margin-bottom: 12px; }
+  .content-section li { font-size: 13px; color: var(--text-mid); margin-bottom: 5px; line-height: 1.6; }
+
+  /* TABLE */
+  .data-table { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 12px; }
+  .data-table th { background: var(--off-white); padding: 10px 14px; text-align: left; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-gray); border-bottom: 1px solid var(--mid-gray); }
+  .data-table td { padding: 10px 14px; border-bottom: 1px solid var(--light-gray); color: var(--text-mid); vertical-align: top; }
+  .data-table tr:last-child td { border-bottom: none; }
+  .data-table tr:nth-child(even) td { background: var(--off-white); }
+
+  /* NUTRITION TIMELINE */
+  .timeline { position: relative; padding-left: 28px; }
+  .timeline::before { content: ''; position: absolute; left: 6px; top: 0; bottom: 0; width: 2px; background: var(--mid-gray); }
+  .tl-item { position: relative; margin-bottom: 20px; }
+  .tl-dot { position: absolute; left: -25px; top: 4px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); border: 2px solid white; box-shadow: 0 0 0 2px var(--accent); }
+  .tl-km { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin-bottom: 2px; }
+  .tl-content { font-size: 12px; color: var(--text-mid); }
+
+  /* EXERCISE CARDS */
+  .exercise-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--mid-gray); border: 1px solid var(--mid-gray); margin-top: 16px; }
+  .exercise-card { background: var(--white); padding: 20px; }
+  .ex-num { font-family: 'Barlow Condensed', sans-serif; font-size: 32px; font-weight: 900; color: var(--mid-gray); line-height: 1; }
+  .ex-name { font-size: 13px; font-weight: 700; color: var(--text-dark); margin: 4px 0; }
+  .ex-sets { font-size: 11px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+  .ex-desc { font-size: 11px; color: var(--text-gray); line-height: 1.5; }
+
+  /* STRETCH CARDS */
+  .stretch-timeline { display: flex; flex-direction: column; gap: 1px; background: var(--mid-gray); border: 1px solid var(--mid-gray); margin-top: 16px; }
+  .stretch-item { background: var(--white); display: grid; grid-template-columns: 60px 1fr 80px; align-items: center; gap: 16px; padding: 14px 20px; }
+  .stretch-time { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 900; color: var(--accent); }
+  .stretch-name { font-size: 13px; font-weight: 700; color: var(--text-dark); }
+  .stretch-target { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-gray); margin-top: 2px; }
+  .stretch-detail { font-size: 11px; color: var(--text-mid); line-height: 1.5; }
+  .stretch-badge { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; padding: 3px 8px; border-radius: 2px; text-align: center; }
+
+  /* DIET */
+  .meal-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--mid-gray); border: 1px solid var(--mid-gray); margin-top: 16px; }
+  .meal-card { background: var(--white); padding: 22px; }
+  .meal-time { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-gray); margin-bottom: 6px; }
+  .meal-name { font-size: 15px; font-weight: 700; color: var(--text-dark); margin-bottom: 12px; }
+  .meal-row { display: flex; justify-content: space-between; align-items: baseline; padding: 5px 0; border-bottom: 1px solid var(--light-gray); }
+  .meal-row:last-child { border-bottom: none; }
+  .meal-item { font-size: 12px; color: var(--text-mid); }
+  .meal-cal { font-size: 11px; font-weight: 700; color: var(--text-gray); }
+  .meal-total { display: flex; justify-content: space-between; margin-top: 10px; padding-top: 8px; border-top: 2px solid var(--text-dark); }
+  .meal-total-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
+  .meal-total-cal { font-size: 14px; font-weight: 700; color: var(--accent); }
+
+  /* GUT TRAINING */
+  .gut-phases { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--mid-gray); border: 1px solid var(--mid-gray); margin-top: 16px; }
+  .gut-phase { background: var(--white); padding: 20px; }
+  .gut-phase-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
+  .gut-phase-km { font-family: 'Barlow Condensed', sans-serif; font-size: 28px; font-weight: 900; color: var(--accent); line-height: 1; margin-bottom: 8px; }
+  .gut-phase-detail { font-size: 11px; color: var(--text-mid); line-height: 1.5; }
+
+  /* CALLOUT BOX */
+  .callout { border-left: 3px solid var(--accent); background: var(--accent-light); padding: 16px 20px; margin: 16px 0; }
+  .callout.green { border-left-color: var(--green); background: var(--green-light); }
+  .callout.blue { border-left-color: var(--blue); background: var(--blue-light); }
+  .callout.purple { border-left-color: var(--purple); background: var(--purple-light); }
+  .callout p { font-size: 13px; color: var(--text-dark); margin: 0; }
+  .callout strong { font-weight: 700; }
+
+  /* RACE DAY HERO */
+  .race-hero {
+    background: var(--text-dark); color: white;
+    padding: 60px 40px; text-align: center;
+  }
+  .race-hero h2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 80px; font-weight: 900; letter-spacing: -2px; line-height: 0.9;
+    color: var(--accent);
+  }
+  .race-hero p { color: #aaa; font-size: 14px; margin-top: 16px; max-width: 560px; margin-left: auto; margin-right: auto; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .days-grid { grid-template-columns: repeat(4, 1fr); }
+    .phase-band { grid-template-columns: repeat(2, 1fr); }
+    .exercise-grid { grid-template-columns: repeat(2, 1fr); }
+    .gut-phases { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 600px) {
+    .hero { padding: 40px 20px 32px; }
+    .days-grid { grid-template-columns: repeat(2, 1fr); }
+    .info-grid, .meal-grid { grid-template-columns: 1fr; }
+    .exercise-grid { grid-template-columns: 1fr; }
+    .gut-phases { grid-template-columns: 1fr; }
+    .stretch-item { grid-template-columns: 50px 1fr; }
+    .stretch-badge { display: none; }
+    .content-section, .week-header, .legend { padding-left: 20px; padding-right: 20px; }
+    .section-header { padding: 32px 20px 20px; }
+  }
+
+  .divider { height: 1px; background: var(--mid-gray); }
+  .bg-off { background: var(--off-white); }
+
+  /* MACROS BAR */
+  .macro-bar { display: flex; height: 12px; border-radius: 3px; overflow: hidden; margin: 8px 0; }
+  .macro-bar-seg { height: 100%; }
+  .macro-legend { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 6px; }
+  .macro-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--text-mid); }
+  .macro-dot { width: 8px; height: 8px; border-radius: 2px; }
+
+  .emoji { font-style: normal; }
+  .warning-box { background: #fff8f0; border: 1px solid #fcd3b3; border-radius: 4px; padding: 14px 18px; margin: 14px 0; }
+  .warning-box p { font-size: 12px; color: #a04010; margin: 0; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#overview">Overview</a>
+  <a href="#june">June</a>
+  <a href="#july">July</a>
+  <a href="#august">August</a>
+  <a href="#september">September</a>
+  <a href="#gut">Gut Training</a>
+  <a href="#nutrition">Nutrition</a>
+  <a href="#strength">Strength</a>
+  <a href="#flexibility">Flexibility</a>
+  <a href="#raceday">Race Day</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">⚡ June 16 – September 30, 2026 ⚡</div>
+  <h1>100KM</h1>
+  <div class="hero-sub">Ultra Marathon Training Plan · Personal</div>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="stat-num">106</div>
+      <div class="stat-label">Training Days</div>
+    </div>
+    <div class="hero-stat">
+      <div class="stat-num">~680</div>
+      <div class="stat-label">Total KM</div>
+    </div>
+    <div class="hero-stat">
+      <div class="stat-num">6:40</div>
+      <div class="stat-label">Target Pace/km</div>
+    </div>
+    <div class="hero-stat">
+      <div class="stat-num">~11h</div>
+      <div class="stat-label">Finish Time</div>
+    </div>
+    <div class="hero-stat">
+      <div class="stat-num">Sep 30</div>
+      <div class="stat-label">Race Day</div>
+    </div>
+  </div>
+</div>
+
+<!-- PROGRESS -->
+<div class="progress-section">
+  <div class="progress-label">Journey: 27km → 100km</div>
+  <div class="progress-bar-wrap">
+    <div class="progress-bar-fill" style="width: 27%"></div>
+  </div>
+  <div class="progress-markers">
+    <span>27km (now)</span>
+    <span>Phase 1: 30km</span>
+    <span>Phase 2: 45km</span>
+    <span>Phase 3: 60km</span>
+    <span>100km ⚡</span>
+  </div>
+</div>
+
+<!-- PHASE OVERVIEW -->
+<div id="overview" class="phase-band">
+  <div class="phase-band-item p1">
+    <div class="pbi-label">Phase 1 · Jun 16–30</div>
+    <div class="pbi-title">Foundation</div>
+    <div class="pbi-sub">Max 16km weekdays · Long runs Sat · Up to 30km</div>
+  </div>
+  <div class="phase-band-item p2">
+    <div class="pbi-label">Phase 2 · Jul 1–31</div>
+    <div class="pbi-title">Build</div>
+    <div class="pbi-sub">Fully free · Back-to-backs begin · Up to 45km</div>
+  </div>
+  <div class="phase-band-item p3">
+    <div class="pbi-label">Phase 3 · Aug 1–31</div>
+    <div class="pbi-title">Peak</div>
+    <div class="pbi-sub">Highest volume · 60km simulation · B2B every weekend</div>
+  </div>
+  <div class="phase-band-item p4">
+    <div class="pbi-label">Phase 4 · Sep 1–30</div>
+    <div class="pbi-title">Taper</div>
+    <div class="pbi-sub">Volume drops · Trust the work · Arrive fresh</div>
+  </div>
+</div>
+
+<!-- LEGEND -->
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot" style="background:#e2e0dc"></div>Rest</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#2d7a4f"></div>Easy Run</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#e85d2f"></div>Long Run</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#7c3aed"></div>Back-to-Back</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#1e5fa8"></div>Strides</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#c9920a"></div>Taper Run</div>
+</div>
+
+<!-- ===== JUNE ===== -->
+<div id="june" class="page-section phase-1">
+  <div class="section-header">
+    <h2>June 2026</h2>
+    <div class="phase-badge">Phase 1 — Foundation</div>
+  </div>
+  <div class="callout green" style="margin:0;padding:14px 40px;">
+    <p><strong>Your constraint this month:</strong> Max 16km Mon–Fri. Weekends are free — use Sat for your long run, Sun for rest or recovery. Keep all runs at 6:50–7:10/km. Your gut training begins now on every long run.</p>
+  </div>
+
+  <!-- WEEK 1 -->
+  <div class="week-block">
+    <div class="week-header">
+      <h3>Week 1 — Settle In · Jun 16–22</h3>
+      <div class="week-total">≈ 62 km <span>/ week</span></div>
+    </div>
+    <div class="days-grid">
+      <div class="day-card type-easy">
+        <div class="day-label">Mon · Jun 16</div>
+        <div class="day-type">Easy Run</div>
+        <div class="day-km">14km</div>
+        <div class="day-pace">6:50–7:00/km · Zone 2</div>
+        <div class="day-note">Your base. Conversational pace. This is your starting line.</div>
+      </div>
+      <div class="day-card type-easy">
+        <div class="day-label">Tue · Jun 17</div>
+        <div class="day-type">Easy Run</div>
+        <div class="day-km">14km</div>
+        <div class="day-pace">6:50–7:00/km · Zone 2</div>
+        <div class="day-note">Feel loose. Breathe easy. No pressure.</div>
+      </div>
+      <div class="day-card type-rest">
+        <div class="day-label">Wed · Jun 18</div>
+        <div class="day-type">Rest</div>
+        <div class="day-km">—</div>
+        <div class="day-note">Full rest. Foam roll. Eat well. Sleep 8+ hrs.</div>
+      </div>
+      <div class="day-card type-easy">
+        <div class="day-label">Thu · Jun 19</div>
+        <div class="day-type">Easy Run</div>
+        <div class="day-km">14km</div>
+        <div class="day-pace">6:50/km · Zone 2</div>
+        <div class="day-note">Pre-long run flush. Fresh legs Friday.</div>
+      </div>
+      <div class="day-card type-rest">
+        <div class="day-label">Fri · Jun 20</div>
+        <div class="day-type">Rest</div>
+        <div class="day-km">—</div>
+        <div class="day-note">Prep for long run. Eat high-carb dinner. Sleep 9 hrs.</div>
+      </div>
+      <div class="day-card type-long">
+        <div class="day-label">Sat · Jun 21</div>
+        <div class="day-type">Long Run 🔥</div>
+        <div class="day-km">26km</div>
+        <div class="day-pace">6:40–6:50/km</div>
+        <div class="day-note">First gel at km 10, second at km 20. Drink every 20 min. New PB — embrace it.</div>
+      </div>
+      <div class="day-card type-rest">
+        <div class="day-label">Sun · Jun 22</div>
+        <div class="day-type">Rest</div>
+        <div class="day-km">—</div>
+        <div class="day-note">Full rest. 3 full meals. Elevate legs 20 min. Sleep 9 hrs.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WEEK 2 -->
+  <div class="week-block">
+    <div class="week-header">
+      <h3>Week 2 — Push the Long · Jun 23–29</h3>
+      <div class="week-total">≈ 70 km <span>/ week</span></div>
+    </div>
+    <div class="days-grid">
+      <div class="day-card type-easy">
+        <div class="day-label">Mon · Jun 23</div>
+        <div class="day-type">Easy Run</div>
+        <div class="day-km">14km</div>
+        <div class="day-pace">7:00/km · Zone 2</div>
+        <div class="day-note">Recovery run. Very easy. HR below 133.</div>
+      </div>
+      <div class="day-card type-easy">
+        <div class="day-label">Tue · Jun 24</div>
+        <div class="day-type">Easy Run</div>
+        <div class="day-km">14km</div>
+        <div class="day-pace">6:50/km · Zone 2</div>
+        <div class="day-note">Aerobic base. Focus on breathing rhythm.</div>
+      </div>
+      <div class="day-card type-strides">
+        <div class="day-label">Wed · Jun 25</div>
+        <div class="day-type">Easy + Strides</div>
+        <div class="day-km">14km</div>
+        <div class="day-pace">6:50/km + 6×100m strides</div>
+        <div class="day-note">Strides at 5:00/km feel — 30 sec fast, walk back. Leg turnover work.</div>
+      </div>
+      <div class="day-card type-rest">
+        <div class="day-label">Thu · Jun 26</div>
+        <div class="day-type">Rest</div>
+        <div class="day-km">—</div>
+        <div class="day-note">Full rest. Eat pasta dinner. Prepare for 28km Sat.</div>
+      </div>
+      <div class="day-card type-easy">
+        <div class="day-label">Fri · Jun 27</div>
+        <div class="day-type">Easy Run</div>
+        <div class="day-km">14km</div>
+        <div class="day-pace">7:00/km</div>
+        <div class="day-note">Pre-long shakeout. Keep legs fresh for Sat.</div>
+      </div>
+      <div class="day-card type-long">
+        <div class="day-label">Sat · Jun 28</div>
+        <div class="day-type">Long Run 🔥</div>
+        <div class="day-km">28km</div>
+        <div class="day-pace">6:40–6:50/km</div>
+        <div class="day-note">Gel at km 10, 18, 24. Drink every 20 min. Walk 60 sec at km 20 if needed.</div>
+      </div>
+      <div class="day-card type-rest">
+        <div class="day-label">Sun · Jun 29</div>
+        <div class="day-type">Rest</div>
+        <div class="day-km">—</div>
+        <div class="day-note">Full rest. Protein + carbs all day. You just ran 28km — respect it.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WEEK 3 (partial) -->
+  <div class="week-block">
+    <div class="week-header">
+      <h3>Week 3 — Close Out June · Jun 30</h3>
+      <div class="week-total">June Total ≈ ~205 km</div>
+    </div>
+    <div class="days-grid">
+      <div class="day-card type-easy">
+        <div class="day-label">Mon · Jun 30</div>
+        <div class="day-type">Easy Run</div>
+        <div class="day-km">14km</div>
+        <div class="day-pace">7:00–7:10/km · Very Easy</div>
+        <div class="day-note">Month-close flush run. June is done. Phase 2 starts tomorrow.</div>
+      </div>
+      <div class="day-card type-rest" style="background:var(--off-white)">
+        <div class="day-label">Rest of week →</div>
+        <div class="day-type">July</div>
+        <div class="day-km">→</div>
+        <div class="day-note">Continue in July schedule below</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-grid">
+    <div class="info-box">
+      <h4>🧠 June Mindset</h4>
+      <p>Your constraint (max 16km weekdays) is actually perfect. These base miles build your aerobic engine without digging a hole. Don't try to squeeze in extra — the long run Saturday is where the real work happens.</p>
+      <p style="margin-top:8px">At 15 years old, your body recovers fast — but tendons and bones adapt slower than fitness. Respect the easy pace. Zone 2 only.</p>
+    </div>
+    <div class="info-box">
+      <h4>⚠️ June Rules</h4>
+      <ul>
+        <li>Every weekday run: max 16km, no exceptions</li>
+        <li>Saturday = long run. Sunday = full rest always</li>
+        <li>All easy runs at 6:50–7:10/km — if breathing hard, slow down</li>
+        <li>Start gut training NOW: practice gels on every run over 20km</li>
+        <li>Sleep 8–9 hours every night. Non-negotiable at your age</li>
+        <li>10% Rule: weekly km only goes up ≈10% max per week</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ===== JULY ===== -->
+<div id="july" class="page-section phase-2">
+  <div class="section-header">
+    <h2>July 2026</h2>
+    <div class="phase-badge">Phase 2 — Build · Fully Free</div>
+  </div>
+  <div class="callout blue" style="margin:0;padding:14px 40px;">
+    <p><strong>You're free all day in July.</strong> Use morning runs + evening doubles if needed. Back-to-back weekends begin Week 6. This is where ultra runners are made. The secret weapon: Sunday runs on tired legs.</p>
+  </div>
+
+  <!-- WEEK 3 cont -->
+  <div class="week-block">
+    <div class="week-header">
+      <h3>Week 3 — Freedom Begins · Jul 1–6</h3>
+      <div class="week-total">≈ 82 km <span>/ week</span></div>
+    </div>
+    <div class="days-grid">
+      <div class="day-card type-easy">
+        <div class="day-label">Tue · Jul 1</div>
+        <div class="day-type">Easy Run</div>
+        <div class="day-km">14km</div>
+        <div class="day-pace">6:50/km · Zone 2</div>
+        <div class="day-note">First day of full freedom. Morning run, nap after.</div>
+      </div>
+      <div class="day-card type-easy">
+        <div class="day-label">Wed · Jul 2</div>
+        <div class="day-type">Easy Run</div>
+        <div class="day-km">15km</div>
+        <div class="day-pace">6:50/km · Zone 2</div>
+        <div class="day-note">First bump to 15km. Feel the extra km — easy.</div>
+      </div>
+      <div class="day-card type-strides">
+        <div class="day-label">Thu · Jul 3</div>
+        <div class="day-type">Easy + Strides</div>
+        <div class="day-km">14km</div>
+        <div class="day-pace">6:50/km + 8×100m strides</div>
+        <div class="day-note">Leg speed work. Strides at 5:00/km. Walk fully between each.</div>
+      </div>
+      <div class="day-card type-rest">
+        <div class="day-label">Fri · Jul 4</div>
+        <div class="day-type">Rest</div>
+        <div class="day-km">—</div>
+        <div class="day-note">Full rest. Carb load dinner. Sleep 9+ hrs. Prepare for 33km Sat.</div>
+      </div>
+      <div class="day-card type-long">
+        <div class="day-label">Sat · Jul 5</div>
+        <div class="day-type">Long Run 🔥</div>
+        <div class="day-km">33km</div>
+        <div class="day-pace">6:40–6:50/km</div>
+        <div class="day-note">Gel every 45 min. Focus on even effort not pace. New PB territory.</div>
+      </div>
+      <div class="day-card type-rest">
+        <div class="day-label">Sun · Jul 6</div>
+        <div class="day-type">Rest</div>
+        <div class="day-km">—</div>
+        <div class="day-note">Full recovery. Protein-heavy meals. Sleep 9+ hrs. Nap OK.</div>
+      </div>
+      <div class="day-card type-easy">
+        <div class="day-label">Mon · Jul 7</div>
+        <div class="day-type">Easy Run</div>
+        <div class="day-km">14km</div>
+        <div class="day-pace">7:00/km · Zone 2</div>
+        <div class="day-note">Flush the long run. Easy and slow. HR in Zone 1–2 only.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WEEK 4 CUTBACK -->
+  <div class="week-block">
+    <div class="week-header">
+      <h3>Week 4 — Cutback Week · Jul 8–14</h3>
+      <div class="week-total">≈ 70 km <span>/ week · recovery</span></div>
+    </div>
+    <div class="days-grid">
+      <div class="day-card type-easy">
+        <div class="day-label">Tue · Jul 8</div>
+        <div class="day-type">Easy Run</div>
+        <div class="day-km">14km</div>
+        <div class="day-pace">6:50/km</div>
+        <div class="day-note">Recovery week. Lower volume. Feel fresh.</div>
+      </div>
+      <div class="day-card type-easy">
+        <div class="day-label">Wed · Jul 9</div>
+        <div class="day-type">Easy Run</div>
+        <div class="day-km">14km</div>
+        <div class="day-pace">6:50/km</div>
+        <div class="day-note">Mid-week. Stay aerobic. No pushing.</div>
+      </div>
+      <div class="day-card type-easy">
+        <div class="day-label">Thu · Jul 10</div>
+        <div class="day-type">Easy Run</div>
+        <div class="day-km">14km</div>
+        <div class="day-pace">7:00/km</div>
+        <div class="day-note">Easy effort. Focus on breathing rhythm.</div>
+      </div>
+      <div class="day-card type-rest">
+        <div class="day-label">Fri · Jul 11</div>
+        <div class="day-type">Rest</div>
+        <div class="day-km">—</div>
+        <div class="day-note">Full rest. Yoga/stretch OK. Eat well. Sleep big.</div>
+      </div>
+      <div class="day-card type-long">
+        <div class="day-label">Sat · Jul 12</div>
+        <div class="day-type">Long Run 🔥</div>
+        <div class="day-km">26km</div>
+        <div class="day-pace">6:40–6:50/km</div>
+        <div class="day-note">Cutback long. Easier than last two weeks. Practice nutrition as always.</div>
+      </div>
+      <div class="day-card type-rest">
+        <div class="day-label">Sun · Jul 13</div>
+        <div class="day-type">Rest</div>
+        <div class="day-km">—</div>
+        <div class="day-note">Full rest. Your body adapts now — let it.</div>
+      </div>
+      <div class="day-card type-easy">
+        <div class="day-label">Mon · Jul 14</div>
+        <div class="day-type">Easy Run</div>
+        <div class="day-km">14km</div>
+        <div class="day-pace">7:00/km</div>
+        <div class="day-note">Light and easy. Ready to build again next week.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WEEK 5 FIRST B2B -->
+  <div class="week-block">
+    <div class="week-header">
+      <h3>Week 5 — First Back-to-Back ⚡ · Jul 15–21</h3>
+      <div class="week-total">≈ 97 km <span>/ week</span></div>
+    </div>
+    <div class="callout" style="margin:0;border-radius:0;border-left:none;border-right:none;border-top:none;">
+      <p><strong>⚡ Back-to-Back Weekend Begins:</strong> Run long Saturday, sleep, run Sunday on tired legs. Both at 6:40–7:10/km. Do NOT race these. Sunday slower = perfect. That's the point.</p>
+    </div>
+    <div class="days-grid">
+      <div class="day-card type-easy">
+        <div class="day-label">Tue · Jul 15</div>
+        <div class="day-type">Easy Run</div>
+        <div class="day-km">14km</div>
+        <div class="day-pace">6:50/km</div>
+        <div class="day-note">Build week. Controlled effort.</div>
+      </div>
+      <div class="day-card type-easy">
+        <div class="day-label">Wed · Jul 16</div>
+        <div class="day-type">Easy Run</div>
+        <div class="day-km">14km</div>
+        <div class="day-pace">6:50/km</div>
+        <div class="day-note">Mid-week volume. Keep it honest.</div>
+      </div>
+      <div class="day-card type-easy">
+        <div class="day-label">Thu · Jul 17</div>
+        <div class="day-type">Easy Run</div>
+        <div class="day-km">14km</div>
+        <div class="day-pace">6:50/km</div>
+        <div class="day-note">Pre-B2B prep. Save the legs.</div>
+      </div>
+      <div class="day-card type-rest">
+        <div class="day-label">Fri · Jul 18</div>
+        <div class="day-type">Rest + Carb Load</div>
+        <div class="day-km">—</div>
+        <div class="day-note">Full rest. 3 carb-heavy meals. Pasta, rice, bread. Sleep 9+ hrs.</div>
+      </div>
+      <div class="day-card type-b2b">
+        <div class="day-label">Sat · Jul 19</div>
+        <div class="day-type">B2B Day 1 💜</div>
+        <div class="day-km">35km</div>
+        <div class="day-pace">6:40–6:50/km</div>
+        <div class="day-note">Gel every 45 min. Drink constantly. Even effort — don't race it.</div>
+      </div>
+      <div class="day-card type-b2b">
+        <div class="day-label">Sun · Jul 20</div>
+        <div class="day-type">B2B Day 2 💜</div>
+        <div class="day-km">20km</div>
+        <div class="day-pace">6:50–7:10/km</div>
+        <div class="day-note">On tired legs. This IS the ultra simulation. Slower = correct. Eat big after. Sleep immediately.</div>
+      </div>
+      <div class="day-card type-rest">
+        <div class="day-label">Mon · Jul 21</div>
+        <div class="day-type">Rest</div>
+        <div class="day-km">—</div>
+        <div class="day-note">You ran 55km in 2 days. Rest HARD. High protein + carb all day.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WEEK 6 -->
+  <div class="week-block">
+    <div class="week-header">
+      <h3>Week 6 — Push to 40 · Jul 22–28</h3>
+      <div class="week-total">≈ 91 km <span>/ week</span></div>
+    </div>
+    <div class="days-grid">
+      <div class="day-card type-easy">
+        <div class="day-label">Tue · Jul 22</div>
+        <div class="day-type">Easy Run</div>
+        <div class="day-km">14km</div>
+        <div class="day-pace">6:50/km</div>
+        <div class="day-note">Mid-week base. Zone 2 focus.</div>
+      </div>
+      <div class="day-card type-easy">
+        <div class="day-label">Wed · Jul 23</div>
+        <div class="day-type">Easy Run</div>
+        <div class="day-km">15km</div>
+        <div class="day-pace">6:50/km</div>
+        <div class="day-note">Volume day. Comfortable breathing throughout.</div>
+      </div>
+      <div class="day-card type-easy">
+        <div class="day-label">Thu · Jul 24</div>
+        <div class="day-type">Easy Run</div>
+        <div class="day-km">14km</div>
+        <div class="day-pace">6:50/km</div>
+        <div class="day-note">Consistent base building.</div>
+      </div>
+      <div class="day-card type-rest">
+        <div class="day-label">Fri · Jul 25</div>
+        <div class="day-type">Rest</div>
+        <div class="day-km">—</div>
+        <div class="day-note">Pre-long rest. Eat big. Sleep big. Visualize 40km.</div>
+      </div>
+      <div class="day-card type-long">
+        <div class="day-label">Sat · Jul 26</div>
+        <div class="day-type">Long Run 🔥</div>
+        <div class="day-km">40km</div>
+        <div class="day-pace">6:40–6:50/km</div>
+        <div class="day-note">Your first 40km. Gel every 40 min from km 10. Walk km 30–31 as mid-run reset. Huge milestone.</div>
+      </div>
+      <div class="day-card type-rest">
+        <div class="day-label">Sun · Jul 27</div>
+        <div class="day-type">Rest</div>
+        <div class="day-km">—</div>
+        <div class="day-note">40km deserves FULL rest. 3 meals. Nap if possible.</div>
+      </div>
+      <div class="day-card type-easy">
+        <div class="day-label">Mon · Jul 28</div>
+        <div class="day-type">Easy Run</div>
+        <div class="day-km">14km</div>
+        <div class="day-pace">7:00/km</div>
+        <div class="day-note">Flush out the long run. Very easy. Zone 1–2 only.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WEEK 7 partial -->
+  <div class="week-block">
+    <div class="week-header">
+      <h3>Week 7 — Close Out July · Jul 29–31</h3>
+      <div class="week-total">July Total ≈ ~560 km</div>
+    </div>
+    <div class="days-grid">
+      <div class="day-card type-easy">
+        <div class="day-label">Tue · Jul 29</div>
+        <div class="day-type">Easy Run</div>
+        <div class="day-km">14km</div>
+        <div class="day-pace">7:00/km</div>
+        <div class="day-note">Recovery from big week.</div>
+      </div>
+      <div class="day-card type-easy">
+        <div class="day-label">Wed · Jul 30</div>
+        <div class="day-type">Easy Run</div>
+        <div class="day-km">14km</div>
+        <div class="day-pace">6:50/km</div>
+        <div class="day-note">Mid-week base. Comfortable effort.</div>
+      </div>
+      <div class="day-card type-easy">
+        <div class="day-label">Thu · Jul 31</div>
+        <div class="day-type">Easy Run</div>
+        <div class="day-km">14km</div>
+        <div class="day-pace">7:00/km</div>
+        <div class="day-note">End of July. 2 months building complete. You're becoming an ultra runner.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== AUGUST ===== -->
+<div id="august" class="page-section phase-3">
+  <div class="section-header">
+    <h2>August 2026</h2>
+    <div class="phase-badge">Phase 3 — Peak · Where 100km Gets Earned</div>
+  </div>
+  <div class="callout" style="margin:0;padding:14px 40px;background:#fff2ee;border-left:3px solid var(--accent);">
+    <p><strong>Your biggest month.</strong> Back-to-backs every weekend. The 60km simulation on Aug 30 is your confidence builder — if you can run 60km in training, you KNOW you can run 100km on race day.</p>
+  </div>
+
+  <!-- WEEK 7 cont Aug 1–4 -->
+  <div class="week-block">
+    <div class="week-header">
+      <h3>Week 7 Cont — Cutback B2B · Aug 1–4</h3>
+      <div class="week-total">≈ 76 km <span>/ week</span></div>
+    </div>
+    <div class="days-grid">
+      <div class="day-card type-rest">
+        <div class="day-label">Fri · Aug 1</div>
+        <div class="day-type">Rest</div>
+        <div class="day-km">—</div>
+        <div class="day-note">Pre-cutback rest. Eat well. Prepare for Peak month mentally.</div>
+      </div>
+      <div class="day-card type-b2b">
+        <div class="day-label">Sat · Aug 2</div>
+        <div class="day-type">B2B Day 1 💜</div>
+        <div class="day-km">30km</div>
+        <div class="day-pace">6:40–6:50/km</div>
+        <div class="day-note">Cutback B2B — shorter but fatiguing. Full nutrition protocol always.</div>
+      </div>
+      <div class="day-card type-b2b">
+        <div class="day-label">Sun · Aug 3</div>
+        <div class="day-type">B2B Day 2 💜</div>
+        <div class="day-km">18km</div>
+        <div class="day-pace">6:50–7:10/km</div>
+        <div class="day-note">Tired legs. Race pace simulation. Stay patient and steady.</div>
+      </div>
+      <div class="day-card type-rest">
+        <div class="day-label">Mon · Aug 4</div>
+        <div class="day-type">Rest</div>
+        <div class="day-km">—</div>
+        <div class="day-note">Full recovery. Big eating day. Sleep 9+ hrs tonight.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WEEK 8 PEAK BUILD 1 -->
+  <div class="week-block">
+    <div class="week-header">
+      <h3>Week 8 — Peak Build 1 · Aug 5–11</h3>
+      <div class="week-total">≈ 109 km <span>/ week</span></div>
+    </div>
+    <div class="days-grid">
+      <div class="day-card type-easy">
+        <div class="day-label">Tue · Aug 5</div>
+        <div class="day-type">Easy Run</div>
+        <div class="day-km">15km</div>
+        <div class="day-pace">6:50/km · Zone 2</div>
+        <div class="day-note">Back to building. Controlled Zone 2 only.</div>
+      </div>
+      <div class="day-card type-easy">
+        <div class="day-label">Wed · Aug 6</div>
+        <div class="day-type">Easy Run</div>
+        <div class="day-km">16km</div>
+        <div class="day-pace">6:50/km · Zone 2</div>
+        <div class="day-note">Volume day. Longest mid-week so far. Stay aerobic.</div>
+      </div>
+      <div class="day-card type-easy">
+        <div class="day-label">Thu · Aug 7</div>
+        <div class="day-type">Easy Run</div>
+        <div class="day-km">14km</div>
+        <div class="day-pace">6:50/km</div>
+        <div class="day-note">Keep it aerobic. Don't push. Save for weekend.</div>
+      </div>
+      <div class="day-card type-rest">
+        <div class="day-label">Fri · Aug 8</div>
+        <div class="day-type">Rest</div>
+        <div class="day-km">—</div>
+        <div class="day-note">Pre-B2B rest. Carb load dinner. Visualize finishing 100km.</div>
+      </div>
+      <div class="day-card type-b2b">
+        <div class="day-label">Sat · Aug 9</div>
+        <div class="day-type">B2B Day 1 💜</div>
+        <div class="day-km">42km</div>
+        <div class="day-pace">6:40–6:50/km</div>
+        <div class="day-note">New distance. Stay smooth. Gel every 40 min. Walk if needed km 35+.</div>
+      </div>
+      <div class="day-card type-b2b">
+        <div class="day-label">Sun · Aug 10</div>
+        <div class="day-type">B2B Day 2 💜</div>
+        <div class="day-km">22km</div>
+        <div class="day-pace">6:50–7:10/km</div>
+        <div class="day-note">You're simulating km 60–82 of race day right now. This is the money session.</div>
+      </div>
+      <div class="day-card type-rest">
+        <div class="day-label">Mon · Aug 11</div>
+        <div class="day-type">Rest</div>
+        <div class="day-km">—</div>
+        <div class="day-note">64km weekend. FULL REST. Eat everything. Sleep long. Massage if possible.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WEEK 9 PEAK BUILD 2 -->
+  <div class="week-block">
+    <div class="week-header">
+      <h3>Week 9 — Peak Build 2 · Aug 12–18</h3>
+      <div class="week-total">≈ 115 km <span>/ week · YOUR BIGGEST</span></div>
+    </div>
+    <div class="days-grid">
+      <div class="day-card type-easy">
+        <div class="day-label">Tue · Aug 12</div>
+        <div class="day-type">Easy Run</div>
+        <div class="day-km">15km</div>
+        <div class="day-pace">6:50/km</div>
+        <div class="day-note">Back at it. Controlled effort only.</div>
+      </div>
+      <div class="day-card type-easy">
+        <div class="day-label">Wed · Aug 13</div>
+        <div class="day-type">Easy Run</div>
+        <div class="day-km">16km</div>
+        <div class="day-pace">6:50/km</div>
+        <div class="day-note">Mid-week volume. Stay aerobic. Feel strong.</div>
+      </div>
+      <div class="day-card type-easy">
+        <div class="day-label">Thu · Aug 14</div>
+        <div class="day-type">Easy Run</div>
+        <div class="day-km">14km</div>
+        <div class="day-pace">6:50/km</div>
+        <div class="day-note">Consistent base building. Trust the process.</div>
+      </div>
+      <div class="day-card type-rest">
+        <div class="day-label">Fri · Aug 15</div>
+        <div class="day-type">Rest</div>
+        <div class="day-km">—</div>
+        <div class="day-note">Pre-big-weekend rest. Carb load. Big sleep.</div>
+      </div>
+      <div class="day-card type-b2b">
+        <div class="day-label">Sat · Aug 16</div>
+        <div class="day-type">B2B Day 1 💜</div>
+        <div class="day-km">48km</div>
+        <div class="day-pace">6:40–6:50/km</div>
+        <div class="day-note">First time past marathon in training. Mental toughness test from km 35. You are ready.</div>
+      </div>
+      <div class="day-card type-b2b">
+        <div class="day-label">Sun · Aug 17</div>
+        <div class="day-type">B2B Day 2 💜</div>
+        <div class="day-km">22km</div>
+        <div class="day-pace">7:00–7:20/km</div>
+        <div class="day-note">Survival mode is fine. Keep moving forward. This pain = race day preparation.</div>
+      </div>
+      <div class="day-card type-rest">
+        <div class="day-label">Mon · Aug 18</div>
+        <div class="day-type">Rest</div>
+        <div class="day-km">—</div>
+        <div class="day-note">70km weekend. You're an ultra runner now. Full rest. Massage if possible.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WEEK 10 CUTBACK -->
+  <div class="week-block">
+    <div class="week-header">
+      <h3>Week 10 — Cutback · Aug 19–25</h3>
+      <div class="week-total">≈ 82 km <span>/ week · recovery</span></div>
+    </div>
+    <div class="days-grid">
+      <div class="day-card type-easy">
+        <div class="day-label">Tue · Aug 19</div>
+        <div class="day-type">Easy Run</div>
+        <div class="day-km">14km</div>
+        <div class="day-pace">7:00/km</div>
+        <div class="day-note">Recovery week. Significantly lower effort.</div>
+      </div>
+      <div class="day-card type-easy">
+        <div class="day-label">Wed · Aug 20</div>
+        <div class="day-type">Easy Run</div>
+        <div class="day-km">14km</div>
+        <div class="day-pace">6:50/km</div>
+        <div class="day-note">Mid-week. Light and comfortable.</div>
+      </div>
+      <div class="day-card type-easy">
+        <div class="day-label">Thu · Aug 21</div>
+        <div class="day-type">Easy Run</div>
+        <div class="day-km">14km</div>
+        <div class="day-pace">7:00/km</div>
+        <div class="day-note">Recovery effort. Zone 2 only.</div>
+      </div>
+      <div class="day-card type-rest">
+        <div class="day-label">Fri · Aug 22</div>
+        <div class="day-type">Rest</div>
+        <div class="day-km">—</div>
+        <div class="day-note">Pre-long rest. Body is adapting. Sleep is your superpower.</div>
+      </div>
+      <div class="day-card type-long">
+        <div class="day-label">Sat · Aug 23</div>
+        <div class="day-type">Long Run 🔥</div>
+        <div class="day-km">35km</div>
+        <div class="day-pace">6:40–6:50/km</div>
+        <div class="day-note">Cutback long. Should feel manageable. Practice race nutrition exactly.</div>
+      </div>
+      <div class="day-card type-rest">
+        <div class="day-label">Sun · Aug 24</div>
+        <div class="day-type">Rest</div>
+        <div class="day-km">—</div>
+        <div class="day-note">Full rest. Eat big. Sleep 9+ hrs.</div>
+      </div>
+      <div class="day-card type-easy">
+        <div class="day-label">Mon · Aug 25</div>
+        <div class="day-type">Easy Run</div>
+        <div class="day-km">14km</div>
+        <div class="day-pace">7:00/km</div>
+        <div class="day-note">Light flush. Short and easy.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WEEK 11 PEAK WEEK -->
+  <div class="week-block">
+    <div class="week-header">
+      <h3>Week 11 — THE PEAK WEEK 🔥 · Aug 26–31</h3>
+      <div class="week-total">≈ 88 km · August Total ≈ ~580 km</div>
+    </div>
+    <div class="callout" style="margin:0;border-radius:0;border-left:none;border-right:none;border-top:none;background:#fff0eb;">
+      <p><strong>🔥 The Biggest Day of Your Training Life — Aug 30:</strong> 60km at race pace. Same food, same pace, same mental approach as race day. If you finish this, you WILL finish the 100km.</p>
+    </div>
+    <div class="days-grid">
+      <div class="day-card type-easy">
+        <div class="day-label">Tue · Aug 26</div>
+        <div class="day-type">Easy Run</div>
+        <div class="day-km">14km</div>
+        <div class="day-pace">6:50/km</div>
+        <div class="day-note">Pre-peak building. Save the energy.</div>
+      </div>
+      <div class="day-card type-easy">
+        <div class="day-label">Wed · Aug 27</div>
+        <div class="day-type">Easy Run</div>
+        <div class="day-km">14km</div>
+        <div class="day-pace">6:50/km</div>
+        <div class="day-note">Stay controlled. The big day is Saturday.</div>
+      </div>
+      <div class="day-card type-rest">
+        <div class="day-label">Thu · Aug 28</div>
+        <div class="day-type">Rest</div>
+        <div class="day-km">—</div>
+        <div class="day-note">Full rest. Start carb loading today. Rice, pasta, bread all day.</div>
+      </div>
+      <div class="day-card type-rest">
+        <div class="day-label">Fri · Aug 29</div>
+        <div class="day-type">Rest + Prep</div>
+        <div class="day-km">—</div>
+        <div class="day-note">Final rest before 60km. Lay out all gear. Prep nutrition. Sleep by 9pm. Wake 5am.</div>
+      </div>
+      <div class="day-card type-long" style="border:2px solid var(--accent);">
+        <div class="day-label">Sat · Aug 30</div>
+        <div class="day-type">60KM SIMULATION 🔥</div>
+        <div class="day-km">60km</div>
+        <div class="day-pace">6:40–7:00/km</div>
+        <div class="day-note">THE BIG DAY. Gel every 40 min. Real food km 20 + 40. Walk 2 min every 10km. Finish this = you WILL finish 100km.</div>
+      </div>
+      <div class="day-card type-rest">
+        <div class="day-label">Sun · Aug 31</div>
+        <div class="day-type">REST — EARNED 🏆</div>
+        <div class="day-km">—</div>
+        <div class="day-note">Absolute rest. End of August. You peaked. September is about arriving fresh. Eat. Sleep. Be proud.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SEPTEMBER ===== -->
+<div id="september" class="page-section phase-4">
+  <div class="section-header">
+    <h2>September 2026</h2>
+    <div class="phase-badge">Phase 4 — Taper · Trust Your Training</div>
+  </div>
+  <div class="callout purple" style="margin:0;padding:14px 40px;">
+    <p><strong>Taper Madness Warning:</strong> You will feel like your fitness is disappearing. Legs heavy. Feeling slow. This is normal — your body is supercompensating and storing glycogen. Do NOT add extra runs. Trust the plan. Less is more.</p>
+  </div>
+
+  <!-- WEEK 12 TAPER 1 -->
+  <div class="week-block">
+    <div class="week-header">
+      <h3>Week 12 — Taper Begins · Sep 1–7</h3>
+      <div class="week-total">≈ 64 km <span>/ week</span></div>
+    </div>
+    <div class="days-grid">
+      <div class="day-card type-taper">
+        <div class="day-label">Mon · Sep 1</div>
+        <div class="day-type">Taper Run</div>
+        <div class="day-km">12km</div>
+        <div class="day-pace">6:50–7:00/km</div>
+        <div class="day-note">First taper run. Easy and relaxed. Notice the relief.</div>
+      </div>
+      <div class="day-card type-taper">
+        <div class="day-label">Tue · Sep 2</div>
+        <div class="day-type">Taper Run</div>
+        <div class="day-km">12km</div>
+        <div class="day-pace">6:50/km</div>
+        <div class="day-note">Stay consistent. Shorter than August. Enjoy it.</div>
+      </div>
+      <div class="day-card type-rest">
+        <div class="day-label">Wed · Sep 3</div>
+        <div class="day-type">Rest</div>
+        <div class="day-km">—</div>
+        <div class="day-note">Rest. Foam roll. Legs up the wall 20 min.</div>
+      </div>
+      <div class="day-card type-taper">
+        <div class="day-label">Thu · Sep 4</div>
+        <div class="day-type">Taper Run</div>
+        <div class="day-km">10km</div>
+        <div class="day-pace">7:00/km</div>
+        <div class="day-note">Short and easy. Just maintain feel.</div>
+      </div>
+      <div class="day-card type-rest">
+        <div class="day-label">Fri · Sep 5</div>
+        <div class="day-type">Rest</div>
+        <div class="day-km">—</div>
+        <div class="day-note">Full rest before final long run. Eat carbs.</div>
+      </div>
+      <div class="day-card type-taper">
+        <div class="day-label">Sat · Sep 6</div>
+        <div class="day-type">Taper Long Run</div>
+        <div class="day-km">30km</div>
+        <div class="day-pace">6:40–6:50/km</div>
+        <div class="day-note">Final long run. Full race nutrition. Confirm gel schedule. Confirm shoes feel right.</div>
+      </div>
+      <div class="day-card type-rest">
+        <div class="day-label">Sun · Sep 7</div>
+        <div class="day-type">Rest</div>
+        <div class="day-km">—</div>
+        <div class="day-note">Full rest. Eat well. 3 weeks to go. You've done the work.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WEEK 13 DEEP TAPER -->
+  <div class="week-block">
+    <div class="week-header">
+      <h3>Week 13 — Deep Taper · Sep 8–14</h3>
+      <div class="week-total">≈ 50 km <span>/ week</span></div>
+    </div>
+    <div class="days-grid">
+      <div class="day-card type-taper">
+        <div class="day-label">Mon · Sep 8</div>
+        <div class="day-type">Taper Run</div>
+        <div class="day-km">10km</div>
+        <div class="day-pace">7:00/km</div>
+        <div class="day-note">Short. Easy. Legs should feel OK.</div>
+      </div>
+      <div class="day-card type-taper">
+        <div class="day-label">Tue · Sep 9</div>
+        <div class="day-type">Taper Run</div>
+        <div class="day-km">10km</div>
+        <div class="day-pace">6:50/km</div>
+        <div class="day-note">Maintain leg feel. Don't do more.</div>
+      </div>
+      <div class="day-card type-rest">
+        <div class="day-label">Wed · Sep 10</div>
+        <div class="day-type">Rest</div>
+        <div class="day-km">—</div>
+        <div class="day-note">Full rest. Body storing energy now.</div>
+      </div>
+      <div class="day-card type-taper">
+        <div class="day-label">Thu · Sep 11</div>
+        <div class="day-type">Taper Run</div>
+        <div class="day-km">8km</div>
+        <div class="day-pace">7:00/km</div>
+        <div class="day-note">Very short. Keep legs moving.</div>
+      </div>
+      <div class="day-card type-rest">
+        <div class="day-label">Fri · Sep 12</div>
+        <div class="day-type">Rest</div>
+        <div class="day-km">—</div>
+        <div class="day-note">Rest. Eat carbs. Finalize race plan.</div>
+      </div>
+      <div class="day-card type-taper">
+        <div class="day-label">Sat · Sep 13</div>
+        <div class="day-type">Taper Long Run</div>
+        <div class="day-km">22km</div>
+        <div class="day-pace">6:50/km</div>
+        <div class="day-note">Final medium-long. Should feel EASY. If it feels hard → eat more this week.</div>
+      </div>
+      <div class="day-card type-rest">
+        <div class="day-label">Sun · Sep 14</div>
+        <div class="day-type">Rest</div>
+        <div class="day-km">—</div>
+        <div class="day-note">2 weeks to race. Confirm race kit. Register drop bags.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WEEK 14 PRE-RACE -->
+  <div class="week-block">
+    <div class="week-header">
+      <h3>Week 14 — Pre-Race Week · Sep 15–21</h3>
+      <div class="week-total">≈ 28 km <span>/ week</span></div>
+    </div>
+    <div class="days-grid">
+      <div class="day-card type-taper">
+        <div class="day-label">Mon · Sep 15</div>
+        <div class="day-type">Taper Run</div>
+        <div class="day-km">8km</div>
+        <div class="day-pace">7:00/km</div>
+        <div class="day-note">Short maintenance. Very easy.</div>
+      </div>
+      <div class="day-card type-taper">
+        <div class="day-label">Tue · Sep 16</div>
+        <div class="day-type">Taper Run</div>
+        <div class="day-km">8km</div>
+        <div class="day-pace">7:00/km</div>
+        <div class="day-note">Keep legs turning. Stay relaxed.</div>
+      </div>
+      <div class="day-card type-rest">
+        <div class="day-label">Wed · Sep 17</div>
+        <div class="day-type">Rest</div>
+        <div class="day-km">—</div>
+        <div class="day-note">Rest. Pack drop bags today.</div>
+      </div>
+      <div class="day-card type-strides">
+        <div class="day-label">Thu · Sep 18</div>
+        <div class="day-type">Strides</div>
+        <div class="day-km">6km + strides</div>
+        <div class="day-pace">6km easy + 4×100m race-pace</div>
+        <div class="day-note">Wake up the legs. Race-pace strides feel sharp.</div>
+      </div>
+      <div class="day-card type-rest">
+        <div class="day-label">Fri · Sep 19</div>
+        <div class="day-type">Rest</div>
+        <div class="day-km">—</div>
+        <div class="day-note">Full rest. Begin carb loading tonight. High carb, low fat/fiber.</div>
+      </div>
+      <div class="day-card type-taper">
+        <div class="day-label">Sat · Sep 20</div>
+        <div class="day-type">Shakeout</div>
+        <div class="day-km">6km</div>
+        <div class="day-pace">7:00/km · In race shoes</div>
+        <div class="day-note">Final shakeout. Very easy. Confirm shoes feel perfect.</div>
+      </div>
+      <div class="day-card type-rest">
+        <div class="day-label">Sun · Sep 21</div>
+        <div class="day-type">Rest</div>
+        <div class="day-km">—</div>
+        <div class="day-note">Rest. Eat carbs all day. Sleep by 9pm.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RACE WEEK -->
+  <div class="week-block">
+    <div class="week-header">
+      <h3>Race Week ⚡ Sep 22–30</h3>
+      <div class="week-total">Easy runs only → Race Day</div>
+    </div>
+    <div class="callout purple" style="margin:0;border-radius:0;border-left:none;border-right:none;border-top:none;">
+      <p><strong>Race Week Rules:</strong> Eat 70% carbs every meal. Nothing new — no new foods, shoes, or gear. Sleep 9 hrs minimum Sep 22–29. Stay off feet when not running. The hay is in the barn. You cannot add fitness now. You can only stay fresh.</p>
+    </div>
+    <div class="days-grid">
+      <div class="day-card type-taper">
+        <div class="day-label">Mon · Sep 22</div>
+        <div class="day-type">Easy Run</div>
+        <div class="day-km">6km</div>
+        <div class="day-pace">7:00/km</div>
+        <div class="day-note">Keep legs moving. Nothing more.</div>
+      </div>
+      <div class="day-card type-rest">
+        <div class="day-label">Tue · Sep 23</div>
+        <div class="day-type">Rest</div>
+        <div class="day-km">—</div>
+        <div class="day-note">Full rest. Carb loading begins seriously.</div>
+      </div>
+      <div class="day-card type-taper">
+        <div class="day-label">Wed · Sep 24</div>
+        <div class="day-type">Easy Run</div>
+        <div class="day-km">5km</div>
+        <div class="day-pace">7:00/km</div>
+        <div class="day-note">Just to feel the legs. Nothing more.</div>
+      </div>
+      <div class="day-card type-rest">
+        <div class="day-label">Thu · Sep 25</div>
+        <div class="day-type">Rest</div>
+        <div class="day-km">—</div>
+        <div class="day-note">Full rest. Eat pasta. Sleep 9 hrs.</div>
+      </div>
+      <div class="day-card type-strides">
+        <div class="day-label">Fri · Sep 26</div>
+        <div class="day-type">Final Shakeout</div>
+        <div class="day-km">4km + strides</div>
+        <div class="day-pace">4km easy + 4 strides</div>
+        <div class="day-note">Your last run before race day. Feel the power in your legs. It's there.</div>
+      </div>
+      <div class="day-card type-rest">
+        <div class="day-label">Sat · Sep 27</div>
+        <div class="day-type">Rest — Race Eve</div>
+        <div class="day-km">—</div>
+        <div class="day-note">Check in / race briefing. Lay out ALL gear. Pasta dinner 5pm. Bed by 8–9pm. Set 3 alarms.</div>
+      </div>
+      <div class="day-card type-rest">
+        <div class="day-label">Sun · Sep 28</div>
+        <div class="day-type">Rest</div>
+        <div class="day-km">—</div>
+        <div class="day-note">Light walking only. Stay off feet. Review pacing strategy.</div>
+      </div>
+    </div>
+    <div class="days-grid" style="border-top:1px solid var(--mid-gray)">
+      <div class="day-card type-rest">
+        <div class="day-label">Mon · Sep 29</div>
+        <div class="day-type">Final Rest</div>
+        <div class="day-km">—</div>
+        <div class="day-note">Absolute rest. Sleep early (7–8pm). Eat big lunch. Light dinner 5pm. Wake 3–4am. LET'S GO.</div>
+      </div>
+      <div class="day-card type-race" style="background:var(--text-dark);border:none;grid-column:span 6;">
+        <div class="day-label" style="color:#777">Tue · Sep 30</div>
+        <div class="day-type" style="background:var(--accent);color:white">⚡ RACE DAY ⚡</div>
+        <div class="day-km" style="color:var(--accent);font-size:44px;">100km</div>
+        <div class="day-pace" style="color:#aaa">6:40–7:00/km · Start SLOW · First 20km must feel easy</div>
+        <div class="day-note" style="color:#ccc">Gel every 40 min. Real food every 20km. Walk 2 min every 10km from km 40. Every step after km 60 is earned. Cross that finish line.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== GUT TRAINING ===== -->
+<div id="gut" class="page-section">
+  <div class="content-section">
+    <h2 style="color:var(--green)">Gut Training</h2>
+    <p>Your gut is a muscle. At 11 hours of running, you need 200–300 calories per hour or you WILL hit the wall. Your body stores only ~90 minutes of glycogen. Everything after that is nutrition-dependent. Your gut needs weeks to learn to absorb calories while running — start now.</p>
+
+    <div class="gut-phases">
+      <div class="gut-phase">
+        <div class="gut-phase-title" style="color:var(--green)">Phase 1 · Jun</div>
+        <div class="gut-phase-km">Foundation</div>
+        <div class="gut-phase-detail"><strong>Runs under 20km:</strong> Water only, sip every 15 min.<br><br><strong>Runs 20–30km:</strong> 1 gel at km 10, 1 at km 20. Practice drinking while running — don't stop.</div>
+      </div>
+      <div class="gut-phase">
+        <div class="gut-phase-title" style="color:var(--blue)">Phase 2 · Jul Wk 1–3</div>
+        <div class="gut-phase-km">Building</div>
+        <div class="gut-phase-detail"><strong>Runs 25–35km:</strong> 2 gels + sports drink. Gel every 45–50 min from km 10.<br><br>Try 2 different gel brands. Pick your favorite by end of July.</div>
+      </div>
+      <div class="gut-phase">
+        <div class="gut-phase-title" style="color:var(--accent)">Phase 3 · Jul B2B + Aug</div>
+        <div class="gut-phase-km">Full Protocol</div>
+        <div class="gut-phase-detail"><strong>Runs 35–60km:</strong> Gel every 40 min + real food. Rice balls, dates, banana, PB&J. Add salt tabs every 60 min from km 30.</div>
+      </div>
+      <div class="gut-phase">
+        <div class="gut-phase-title" style="color:var(--purple)">Phase 4 · Sep</div>
+        <div class="gut-phase-km">Race Rehearsal</div>
+        <div class="gut-phase-detail"><strong>Taper long runs:</strong> Exact race nutrition. Same gels, same brand, same timing. Confirm your full 100km fueling plan on Sep 6 long run.</div>
+      </div>
+    </div>
+
+    <h3>Weekly Gut Training Protocol by Run Length</h3>
+    <table class="data-table">
+      <tr><th>Run Length</th><th>Cal/hr Needed</th><th>What to Eat</th><th>When</th><th>Drink</th></tr>
+      <tr><td>Under 15km</td><td>None</td><td>Nothing needed</td><td>—</td><td>Sip water every 15 min</td></tr>
+      <tr><td>15–25km</td><td>100–150 cal/hr</td><td>1 gel or banana slices</td><td>At km 12–15</td><td>200ml water per gel</td></tr>
+      <tr><td>25–35km</td><td>150–200 cal/hr</td><td>2 gels + sports drink</td><td>Every 45–50 min</td><td>Alternate water/sports drink</td></tr>
+      <tr><td>35–50km</td><td>200–250 cal/hr</td><td>Gel + real food (rice balls, dates, banana)</td><td>Every 40 min</td><td>500ml electrolyte/hr</td></tr>
+      <tr><td>50–100km (Race)</td><td>250–300 cal/hr</td><td>Gel + real food + sports drink + salt tabs</td><td>Every 35–40 min</td><td>500ml/hr, alternate water/electrolyte</td></tr>
+    </table>
+
+    <h3>Gut Training Rules</h3>
+    <div class="info-grid" style="border:1px solid var(--mid-gray);margin-top:0;">
+      <div class="info-box">
+        <h4 style="color:var(--green)">✅ Do This</h4>
+        <ul>
+          <li>Always eat your first gel with water (not sports drink)</li>
+          <li>Test multiple gel brands in training: GU, SIS, Maurten</li>
+          <li>Practice eating real food at pace: rice balls, dates, banana</li>
+          <li>Introduce caffeine gels in training from late July, only from km 50+</li>
+          <li>Train with the SAME gels you'll use on race day</li>
+          <li>Add salt to all long run food — you're losing sodium in sweat</li>
+          <li>If nauseous: slow to walk, eat a date, drink water, keep moving</li>
+        </ul>
+      </div>
+      <div class="info-box">
+        <h4 style="color:var(--accent)">❌ Never Do This</h4>
+        <ul>
+          <li>Skip nutrition on runs over 20km — ever</li>
+          <li>Use a new gel brand on race day for the first time</li>
+          <li>Take a gel without water (causes stomach cramps)</li>
+          <li>Drink only plain water for 11+ hours (hyponatremia risk)</li>
+          <li>Go more than 50 min without calories during race</li>
+          <li>Eat a big heavy meal within 2 hrs of running</li>
+          <li>Ignore gut pain — slow down, eat, keep moving</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>Race Day Nutrition Timeline</h3>
+    <div class="timeline" style="margin-top:16px;">
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-km">3 hrs pre-race</div><div class="tl-content">Oats + banana + honey (600 cal). 500ml water. Nothing heavy or new.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-km">1 hr pre-race</div><div class="tl-content">Banana + 2 dates. 250ml water. Coffee if you use it regularly.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-km">KM 0–10</div><div class="tl-content">Nothing. Sip water every 2km. Start conservatively — let faster runners go.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-km">KM 10</div><div class="tl-content">1 gel + 200ml water. First fuel of the day.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-km">KM 20</div><div class="tl-content">1 gel + banana + sports drink 200ml. First aid station fuel.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-km">KM 30</div><div class="tl-content">1 gel + rice ball + water + electrolyte. Add first salt tab here.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-km">KM 40</div><div class="tl-content">1 gel + PB&J quarter + sports drink. Stay ahead of hunger.</div></div>
+      <div class="tl-item"><div class="tl-dot" style="background:var(--purple)"></div><div class="tl-km">KM 50 — HALFWAY</div><div class="tl-content">Real food + 1 caffeine gel + broth or soup. Mental reset. You're halfway. Stay strong.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-km">KM 60</div><div class="tl-content">1 gel + potatoes + salt + water + salt tab. Legs may hurt. Keep eating.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-km">KM 70</div><div class="tl-content">1 gel + banana + dates + sports drink. If nauseous → ginger chews.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-km">KM 80</div><div class="tl-content">1 caffeine gel + real food + water + electrolytes. 20km left. Dig in.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-km">KM 90</div><div class="tl-content">1 gel + whatever you can eat + water. 10km left. Empty the tank.</div></div>
+      <div class="tl-item"><div class="tl-dot" style="background:var(--green)"></div><div class="tl-km">KM 100 🎉</div><div class="tl-content"><strong>FINISH LINE. You did it.</strong></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== NUTRITION ===== -->
+<div id="nutrition" class="page-section">
+  <div class="content-section" style="background:var(--off-white)">
+    <h2 style="color:var(--text-dark)">Personalised Diet Plan</h2>
+    <p>Built for you: 15 years old, 67kg, 177cm. High-volume ultra training demands serious fuel. Your daily calorie needs on easy days are ~2,800–3,000 kcal and on long run days ~3,400–3,800 kcal. This plan uses your 150g chicken + 6 eggs as anchors.</p>
+
+    <div class="warning-box">
+      <p>⚠️ At 15, you're still growing. Never skip meals during training. If you feel constantly tired or lose more than 1kg/week, eat more — especially rice, oats, and bananas. Prioritise sleep. Your body rebuilds overnight.</p>
+    </div>
+
+    <h3>Easy Day Meal Plan (~2,900 kcal)</h3>
+    <div class="meal-grid">
+      <div class="meal-card">
+        <div class="meal-time">6:00–6:30am · Pre-Run</div>
+        <div class="meal-name">Power Oats</div>
+        <div class="meal-row"><span class="meal-item">Oats (100g dry)</span><span class="meal-cal">370 kcal</span></div>
+        <div class="meal-row"><span class="meal-item">1 banana</span><span class="meal-cal">90 kcal</span></div>
+        <div class="meal-row"><span class="meal-item">1 tbsp honey</span><span class="meal-cal">60 kcal</span></div>
+        <div class="meal-row"><span class="meal-item">1 tbsp peanut butter</span><span class="meal-cal">95 kcal</span></div>
+        <div class="meal-row"><span class="meal-item">250ml milk</span><span class="meal-cal">120 kcal</span></div>
+        <div class="meal-total"><span class="meal-total-label">Total</span><span class="meal-total-cal">~735 kcal</span></div>
+      </div>
+      <div class="meal-card">
+        <div class="meal-time">10:00am · Post-Run Recovery</div>
+        <div class="meal-name">Egg + Rice Bowl</div>
+        <div class="meal-row"><span class="meal-item">3 whole eggs (scrambled)</span><span class="meal-cal">210 kcal</span></div>
+        <div class="meal-row"><span class="meal-item">White rice cooked (200g)</span><span class="meal-cal">260 kcal</span></div>
+        <div class="meal-row"><span class="meal-item">Spinach + olive oil drizzle</span><span class="meal-cal">80 kcal</span></div>
+        <div class="meal-row"><span class="meal-item">Salt + soy sauce</span><span class="meal-cal">10 kcal</span></div>
+        <div class="meal-total"><span class="meal-total-label">Total</span><span class="meal-total-cal">~560 kcal</span></div>
+      </div>
+      <div class="meal-card">
+        <div class="meal-time">1:00pm · Lunch (Biggest Meal)</div>
+        <div class="meal-name">Chicken Rice Bowl</div>
+        <div class="meal-row"><span class="meal-item">Grilled chicken breast (150g)</span><span class="meal-cal">250 kcal</span></div>
+        <div class="meal-row"><span class="meal-item">White rice cooked (300g)</span><span class="meal-cal">390 kcal</span></div>
+        <div class="meal-row"><span class="meal-item">Mixed vegetables (broccoli, carrots)</span><span class="meal-cal">80 kcal</span></div>
+        <div class="meal-row"><span class="meal-item">1 tbsp olive oil + garlic sauce</span><span class="meal-cal">120 kcal</span></div>
+        <div class="meal-row"><span class="meal-item">1 avocado (half)</span><span class="meal-cal">120 kcal</span></div>
+        <div class="meal-total"><span class="meal-total-label">Total</span><span class="meal-total-cal">~960 kcal</span></div>
+      </div>
+      <div class="meal-card">
+        <div class="meal-time">4:00pm · Afternoon Snack</div>
+        <div class="meal-name">Recovery Snack</div>
+        <div class="meal-row"><span class="meal-item">Greek yogurt (200g)</span><span class="meal-cal">130 kcal</span></div>
+        <div class="meal-row"><span class="meal-item">Honey (1 tbsp) + granola (30g)</span><span class="meal-cal">175 kcal</span></div>
+        <div class="meal-row"><span class="meal-item">1 banana</span><span class="meal-cal">90 kcal</span></div>
+        <div class="meal-total"><span class="meal-total-label">Total</span><span class="meal-total-cal">~395 kcal</span></div>
+      </div>
+      <div class="meal-card">
+        <div class="meal-time">7:00pm · Dinner</div>
+        <div class="meal-name">Pasta & Egg Repair</div>
+        <div class="meal-row"><span class="meal-item">Pasta cooked (250g)</span><span class="meal-cal">330 kcal</span></div>
+        <div class="meal-row"><span class="meal-item">3 eggs (fried or boiled)</span><span class="meal-cal">210 kcal</span></div>
+        <div class="meal-row"><span class="meal-item">Tomato sauce + ground beef (80g)</span><span class="meal-cal">160 kcal</span></div>
+        <div class="meal-row"><span class="meal-item">Parmesan (15g)</span><span class="meal-cal">60 kcal</span></div>
+        <div class="meal-total"><span class="meal-total-label">Total</span><span class="meal-total-cal">~760 kcal</span></div>
+      </div>
+      <div class="meal-card">
+        <div class="meal-time">Before Bed</div>
+        <div class="meal-name">Sleep & Grow</div>
+        <div class="meal-row"><span class="meal-item">Chocolate milk (300ml)</span><span class="meal-cal">195 kcal</span></div>
+        <div class="meal-row"><span class="meal-item">4 dates</span><span class="meal-cal">95 kcal</span></div>
+        <div class="meal-total"><span class="meal-total-label">Total</span><span class="meal-total-cal">~290 kcal</span></div>
+      </div>
+    </div>
+
+    <div style="margin-top:20px;padding:16px 20px;background:white;border:1px solid var(--mid-gray);">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px;">
+        <strong style="font-size:13px;">Daily Macro Breakdown (Easy Day)</strong>
+        <span style="font-size:13px;font-weight:700;color:var(--accent)">~2,700 kcal total</span>
+      </div>
+      <div class="macro-bar">
+        <div class="macro-bar-seg" style="width:55%;background:#e85d2f;"></div>
+        <div class="macro-bar-seg" style="width:25%;background:#2d7a4f;"></div>
+        <div class="macro-bar-seg" style="width:20%;background:#1e5fa8;"></div>
+      </div>
+      <div class="macro-legend">
+        <div class="macro-item"><div class="macro-dot" style="background:#e85d2f"></div>Carbs ~55% (~375g)</div>
+        <div class="macro-item"><div class="macro-dot" style="background:#2d7a4f"></div>Protein ~25% (~170g)</div>
+        <div class="macro-item"><div class="macro-dot" style="background:#1e5fa8"></div>Fat ~20% (~60g)</div>
+      </div>
+    </div>
+
+    <h3>Long Run Day Additions (+800 kcal)</h3>
+    <div class="callout green">
+      <p>On Saturday long runs: add 2 extra bananas, 1 extra serving of rice (150g) at lunch, extra peanut butter toast before bed, and all your in-run gels (each gel = ~100 kcal). Total target: 3,400–3,800 kcal.</p>
+    </div>
+
+    <h3>Key Micronutrients for a 15-Year-Old Ultra Runner</h3>
+    <table class="data-table">
+      <tr><th>Nutrient</th><th>Why It Matters</th><th>Best Sources in This Plan</th><th>Target</th></tr>
+      <tr><td><strong>Iron</strong></td><td>Prevents fatigue, carries oxygen to muscles</td><td>Eggs (3×/day), spinach, ground beef</td><td>11–15mg/day</td></tr>
+      <tr><td><strong>Calcium</strong></td><td>Bone density — critical at 15 with high mileage</td><td>Milk (250ml), Greek yogurt, cheese</td><td>1300mg/day</td></tr>
+      <tr><td><strong>Vitamin D</strong></td><td>Bone strength, immune function, muscle recovery</td><td>Eggs, sunlight, consider supplement</td><td>600 IU/day</td></tr>
+      <tr><td><strong>Sodium</strong></td><td>Prevents cramps and hyponatremia on long runs</td><td>Salt your food, salt tabs in runs</td><td>2000–3000mg on long run days</td></tr>
+      <tr><td><strong>Magnesium</strong></td><td>Prevents muscle cramps, sleep quality</td><td>Peanut butter, bananas, dark chocolate</td><td>360mg/day</td></tr>
+      <tr><td><strong>Omega-3</strong></td><td>Reduces inflammation between hard sessions</td><td>Add sardines 2×/week to lunch</td><td>Daily</td></tr>
+    </table>
+
+    <h3>Hydration</h3>
+    <div class="info-grid" style="border:1px solid var(--mid-gray);margin-top:0;">
+      <div class="info-box">
+        <h4>Daily Hydration</h4>
+        <ul>
+          <li>500ml water immediately on waking</li>
+          <li>3–4L total on non-run days</li>
+          <li>4–5L on long run days</li>
+          <li>Add electrolytes to 1L per day (sodium + potassium)</li>
+          <li>Urine check: pale yellow = hydrated. Dark = drink more now.</li>
+          <li>No alcohol (you're 15 anyway — good)</li>
+        </ul>
+      </div>
+      <div class="info-box">
+        <h4>During Long Runs</h4>
+        <ul>
+          <li>Carry minimum 1.5L in hydration vest/belt</li>
+          <li>Sip 150–200ml every 20 min</li>
+          <li>Never drink only plain water for 11hrs — hyponatremia risk</li>
+          <li>Alternate: water → sports drink → water → sports drink</li>
+          <li>If cramping mid-run: salt tab immediately + slow to walk</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== STRENGTH ===== -->
+<div id="strength" class="page-section">
+  <div class="content-section">
+    <h2 style="color:var(--blue)">3-Day Strength Plan</h2>
+    <p>Three sessions per week, scheduled on easy run days. Focus: injury prevention, glute activation, hip stability, and core control. No heavy lifting — this is running support work, not bodybuilding. Each session takes 25–35 minutes.</p>
+
+    <div class="callout blue">
+      <p><strong>Schedule:</strong> Do Strength A on Tuesday, Strength B on Thursday, Strength C on Saturday (after your long run only in June — in July/August, do it 2 hrs before or as a separate session). In taper month (Sep), drop to 2 sessions/week.</p>
+    </div>
+
+    <h3>Session A — Glute & Hip Stability (Tue)</h3>
+    <div class="exercise-grid">
+      <div class="exercise-card">
+        <div class="ex-num">01</div>
+        <div class="ex-name">Glute Bridge</div>
+        <div class="ex-sets">3 × 20 reps · 60 sec rest</div>
+        <div class="ex-desc">Lie on back, feet flat, drive hips up. Squeeze glutes at top for 2 sec. This directly fixes anterior pelvic tilt and activates your running engine.</div>
+      </div>
+      <div class="exercise-card">
+        <div class="ex-num">02</div>
+        <div class="ex-name">Single-Leg Glute Bridge</div>
+        <div class="ex-sets">3 × 12 each leg · 60 sec rest</div>
+        <div class="ex-desc">Same as above but one leg extended. Identifies and corrects left-right imbalances. Critical for preventing knee issues on long runs.</div>
+      </div>
+      <div class="exercise-card">
+        <div class="ex-num">03</div>
+        <div class="ex-name">Clamshell</div>
+        <div class="ex-sets">3 × 15 each side · 45 sec rest</div>
+        <div class="ex-desc">Side-lying, knees bent at 45°, feet together. Open top knee like a clamshell. Works hip abductors — prevents ITB syndrome and knee pain.</div>
+      </div>
+      <div class="exercise-card">
+        <div class="ex-num">04</div>
+        <div class="ex-name">Dead Bug</div>
+        <div class="ex-sets">3 × 10 each side · 60 sec rest</div>
+        <div class="ex-desc">On back, arms up, knees at 90°. Extend opposite arm/leg while keeping lower back pressed to floor. Core stability for efficient running form.</div>
+      </div>
+      <div class="exercise-card">
+        <div class="ex-num">05</div>
+        <div class="ex-name">Lateral Band Walk</div>
+        <div class="ex-sets">3 × 15 steps each way</div>
+        <div class="ex-desc">Mini band above knees, half-squat position. Sidestep 15 steps each direction. Activates glute med — protects knees on downhill sections.</div>
+      </div>
+      <div class="exercise-card">
+        <div class="ex-num">06</div>
+        <div class="ex-name">Calf Raises</div>
+        <div class="ex-sets">3 × 20 · both legs then single</div>
+        <div class="ex-desc">On edge of step. Full range — heel drop to toe raise. Prevents shin splints and Achilles issues. Essential at high weekly mileage.</div>
+      </div>
+    </div>
+
+    <h3 style="margin-top:32px;">Session B — Core & Posterior Chain (Thu)</h3>
+    <div class="exercise-grid">
+      <div class="exercise-card">
+        <div class="ex-num">01</div>
+        <div class="ex-name">Plank</div>
+        <div class="ex-sets">3 × 45 sec · progress to 60 sec by Aug</div>
+        <div class="ex-desc">Forearms down, body straight. Don't let hips sag or rise. Builds the anti-rotation core stability runners need at km 60+.</div>
+      </div>
+      <div class="exercise-card">
+        <div class="ex-num">02</div>
+        <div class="ex-name">Side Plank</div>
+        <div class="ex-sets">3 × 30 sec each side</div>
+        <div class="ex-desc">Elbow under shoulder, body straight. Hip must stay up. Lateral stability prevents hip drop mid-stride which causes knee and IT band issues.</div>
+      </div>
+      <div class="exercise-card">
+        <div class="ex-num">03</div>
+        <div class="ex-name">Romanian Deadlift</div>
+        <div class="ex-sets">3 × 12 reps · bodyweight or light DB</div>
+        <div class="ex-desc">Hinge at hips, slight knee bend, feel hamstrings stretch. Trains the posterior chain you use for every uphill stride. Go light and slow.</div>
+      </div>
+      <div class="exercise-card">
+        <div class="ex-num">04</div>
+        <div class="ex-name">Reverse Lunge</div>
+        <div class="ex-sets">3 × 10 each leg · bodyweight</div>
+        <div class="ex-desc">Step backward, knee nearly touching floor. More hip dominant than forward lunge — mimics trail running mechanics and protects the knee.</div>
+      </div>
+      <div class="exercise-card">
+        <div class="ex-num">05</div>
+        <div class="ex-name">Hip Thrust (Floor)</div>
+        <div class="ex-sets">3 × 15 · back on bench or floor</div>
+        <div class="ex-desc">Upper back on bench, feet flat, barbell or bodyweight on hips. Drive up, glutes at top. The #1 exercise for fixing anterior pelvic tilt.</div>
+      </div>
+      <div class="exercise-card">
+        <div class="ex-num">06</div>
+        <div class="ex-name">Bird Dog</div>
+        <div class="ex-sets">3 × 10 each side · slow and controlled</div>
+        <div class="ex-desc">On all fours, extend opposite arm and leg. Hold 3 sec at top. Spinal stability and glute activation combined. Perfect APT correction exercise.</div>
+      </div>
+    </div>
+
+    <h3 style="margin-top:32px;">Session C — Ankle, Balance & Running Specifics (Sat or 2nd Tue)</h3>
+    <div class="exercise-grid">
+      <div class="exercise-card">
+        <div class="ex-num">01</div>
+        <div class="ex-name">Single-Leg Balance</div>
+        <div class="ex-sets">3 × 45 sec each leg</div>
+        <div class="ex-desc">Eyes open, then progress to eyes closed. Ankle stability prevents sprains on uneven trail surfaces. Essential for 100km race terrain.</div>
+      </div>
+      <div class="exercise-card">
+        <div class="ex-num">02</div>
+        <div class="ex-name">Step-Up with Knee Drive</div>
+        <div class="ex-sets">3 × 12 each leg</div>
+        <div class="ex-desc">Step onto a box or step, drive opposite knee up. Single-leg strength mimics running — especially important for steep hills in your race.</div>
+      </div>
+      <div class="exercise-card">
+        <div class="ex-num">03</div>
+        <div class="ex-name">Wall Sit</div>
+        <div class="ex-sets">3 × 45 sec · thighs parallel</div>
+        <div class="ex-desc">Quad endurance for descents. If your quads give out on downhills at km 70, you need this. Progress to 60 sec by August.</div>
+      </div>
+      <div class="exercise-card">
+        <div class="ex-num">04</div>
+        <div class="ex-name">Ankle Alphabet</div>
+        <div class="ex-sets">2 × full alphabet each ankle</div>
+        <div class="ex-desc">Seated, draw the alphabet in the air with your big toe. Builds ankle proprioception and prevents sprains on uneven ground.</div>
+      </div>
+      <div class="exercise-card">
+        <div class="ex-num">05</div>
+        <div class="ex-name">Pallof Press</div>
+        <div class="ex-sets">3 × 12 each side · band or cable</div>
+        <div class="ex-desc">Resistance band anchored to side, press out and hold. Anti-rotation core work that translates directly to running efficiency.</div>
+      </div>
+      <div class="exercise-card">
+        <div class="ex-num">06</div>
+        <div class="ex-name">Tibialis Raises</div>
+        <div class="ex-sets">3 × 20 · back against wall</div>
+        <div class="ex-desc">Back against wall, heels on ground, dorsiflexion (pull toes up). The single best exercise for preventing shin splints during high mileage months.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== FLEXIBILITY ===== -->
+<div id="flexibility" class="page-section">
+  <div class="content-section" style="background:var(--off-white)">
+    <h2 style="color:var(--purple)">20-Min Daily Cooldown</h2>
+    <p>Do this after every run. Focused on: touching toes, hip flexor release, hamstring lengthening, fixing anterior pelvic tilt (APT), and activating glutes. Each session flows in order — don't skip ahead. Hold each stretch fully — rushing defeats the purpose.</p>
+
+    <div class="callout purple">
+      <p><strong>Anterior Pelvic Tilt (APT) Fix:</strong> Your hips tilting forward (butt sticks out, lower back arches) is caused by tight hip flexors + weak glutes. Stretches #2, #3, #4 and strength exercises B5 + B6 fix this directly. You'll see improvement in 6–8 weeks of consistency.</p>
+    </div>
+
+    <div class="stretch-timeline">
+      <div class="stretch-item">
+        <div class="stretch-time">2:00</div>
+        <div>
+          <div class="stretch-name">Standing Forward Fold — Toe Touch Progression</div>
+          <div class="stretch-target">Hamstrings · Calves · Lower Back</div>
+          <div class="stretch-detail">Stand feet together, fold forward. Let gravity work — don't force. Bend knees slightly if needed, then slowly straighten. Each breath, let your hands drop closer to the floor. Shake head yes/no to release neck. Over weeks, you'll reach the floor.</div>
+        </div>
+        <div class="stretch-badge" style="background:var(--purple-light);color:var(--purple)">APT Fix</div>
+      </div>
+      <div class="stretch-item">
+        <div class="stretch-time">2:00</div>
+        <div>
+          <div class="stretch-name">Kneeling Hip Flexor Stretch (Couch Stretch)</div>
+          <div class="stretch-target">Hip Flexors · Quads · APT Correction</div>
+          <div class="stretch-detail">Kneel on one knee, back foot up on couch/wall behind you. Drive front hip forward and squeeze rear glute HARD. This directly releases tight hip flexors causing APT. 60 sec each side, repeat. You should feel a strong pull at front of rear hip.</div>
+        </div>
+        <div class="stretch-badge" style="background:var(--accent-light);color:var(--accent)">Critical</div>
+      </div>
+      <div class="stretch-item">
+        <div class="stretch-time">2:00</div>
+        <div>
+          <div class="stretch-name">Pigeon Pose (or Figure 4)</div>
+          <div class="stretch-target">Glutes · Piriformis · Hip External Rotators</div>
+          <div class="stretch-detail">From plank, bring one knee to wrist and extend back leg. Sink hips down and breathe into the tightness. If too intense, do figure-4 on back (ankle on opposite knee, pull legs toward chest). Deep glute stretch — prevents sciatic pain on long runs.</div>
+        </div>
+        <div class="stretch-badge" style="background:var(--purple-light);color:var(--purple)">APT Fix</div>
+      </div>
+      <div class="stretch-item">
+        <div class="stretch-time">2:00</div>
+        <div>
+          <div class="stretch-name">Supine Glute Bridge Hold (Active)</div>
+          <div class="stretch-target">Glute Activation · Lower Back Reset · APT</div>
+          <div class="stretch-detail">Lie on back, drive hips up into bridge, squeeze glutes HARD at top, hold 10 sec, lower slowly. Do 8 reps. This is not rest — it's active glute firing. Teaches your glutes to fire correctly during running, combating APT directly.</div>
+        </div>
+        <div class="stretch-badge" style="background:var(--accent-light);color:var(--accent)">Critical</div>
+      </div>
+      <div class="stretch-item">
+        <div class="stretch-time">2:00</div>
+        <div>
+          <div class="stretch-name">Seated Hamstring Stretch — Long Sit</div>
+          <div class="stretch-target">Hamstrings · Sciatic Nerve · Lower Back</div>
+          <div class="stretch-detail">Sit with legs straight out, flex feet (toes toward you), reach forward. Don't round the back — hinge from hips. Hold 30 sec, walk hands further. Tight hamstrings pull the pelvis into APT — this directly addresses the root cause.</div>
+        </div>
+        <div class="stretch-badge" style="background:var(--purple-light);color:var(--purple)">APT Fix</div>
+      </div>
+      <div class="stretch-item">
+        <div class="stretch-time">2:00</div>
+        <div>
+          <div class="stretch-name">90/90 Hip Stretch</div>
+          <div class="stretch-target">Hip Internal + External Rotation · Deep Hip Capsule</div>
+          <div class="stretch-detail">Sit with front leg at 90° and back leg at 90°. Sit tall on both sits bones. Lean forward over the front shin. Switch sides. This opens the deep hip joint — unlocks the hip mobility needed for efficient long-distance stride.</div>
+        </div>
+        <div class="stretch-badge" style="background:var(--green-light);color:var(--green)">Hip Mobility</div>
+      </div>
+      <div class="stretch-item">
+        <div class="stretch-time">1:30</div>
+        <div>
+          <div class="stretch-name">World's Greatest Stretch</div>
+          <div class="stretch-target">Hip Flexors · Thoracic Rotation · Hamstrings</div>
+          <div class="stretch-detail">Start in lunge, place same-side hand on ground, rotate thoracic spine reaching other hand to sky. Hold 5 sec, alternate. 5 reps each side. The single best mobility exercise for runners — hits everything in one flow.</div>
+        </div>
+        <div class="stretch-badge" style="background:var(--blue-light);color:var(--blue)">Full Body</div>
+      </div>
+      <div class="stretch-item">
+        <div class="stretch-time">1:30</div>
+        <div>
+          <div class="stretch-name">Standing Calf + Achilles Stretch</div>
+          <div class="stretch-target">Gastrocnemius · Soleus · Achilles Tendon</div>
+          <div class="stretch-detail">Hands on wall, one foot back — straight leg (gastrocnemius), then bent knee (soleus + achilles). 45 sec each position, each leg. Prevents Achilles issues and plantar fasciitis during peak mileage in August.</div>
+        </div>
+        <div class="stretch-badge" style="background:var(--gold-light);color:var(--gold)">Injury Prev</div>
+      </div>
+      <div class="stretch-item">
+        <div class="stretch-time">1:30</div>
+        <div>
+          <div class="stretch-name">Child's Pose with Lat Reach</div>
+          <div class="stretch-target">Lower Back · Lats · Thoracic Spine</div>
+          <div class="stretch-detail">From kneeling, sit back on heels, arms extended. Walk hands to each side to stretch lats. Breathe deeply — 5 slow breaths. Decompresses the spine after running and releases upper back tension from arm swing.</div>
+        </div>
+        <div class="stretch-badge" style="background:var(--green-light);color:var(--green)">Recovery</div>
+      </div>
+      <div class="stretch-item">
+        <div class="stretch-time">2:00</div>
+        <div>
+          <div class="stretch-name">Wall-Assisted Hamstring + Pelvic Tilt Reset</div>
+          <div class="stretch-target">Hamstrings · Posterior Pelvic Tilt · APT Reset</div>
+          <div class="stretch-detail">Lie on back, one leg up the wall, other leg straight on floor. Hold 60 sec each side. Then: with both legs bent, press lower back firmly INTO floor (posterior pelvic tilt), hold 10 sec, release. 10 reps. This directly trains pelvic neutral — the cure for APT.</div>
+        </div>
+        <div class="stretch-badge" style="background:var(--accent-light);color:var(--accent)">Critical</div>
+      </div>
+      <div class="stretch-item">
+        <div class="stretch-time">1:30</div>
+        <div>
+          <div class="stretch-name">Hip Flexor Activation Check — Dead Bug Final</div>
+          <div class="stretch-target">Deep Core · Pelvic Stability Check</div>
+          <div class="stretch-detail">Slow dead bug: on back, arms up, lower one arm and opposite leg until nearly touching floor, press lower back DOWN throughout. 8 slow reps. This is your daily APT diagnostic — if back arches off floor, your core still has work to do.</div>
+        </div>
+        <div class="stretch-badge" style="background:var(--purple-light);color:var(--purple)">APT Fix</div>
+      </div>
+    </div>
+
+    <div class="info-grid" style="border:1px solid var(--mid-gray);margin-top:1px;">
+      <div class="info-box">
+        <h4>📅 Flexibility Milestones</h4>
+        <ul>
+          <li><strong>Week 4 (Jul 7):</strong> Should touch mid-shin in forward fold</li>
+          <li><strong>Week 8 (Aug 4):</strong> Should touch ankles or near floor</li>
+          <li><strong>Week 12 (Sep 1):</strong> Should touch floor or close</li>
+          <li><strong>Race week:</strong> Full palms-flat floor touch — this is realistic with consistency</li>
+          <li>APT improvement: noticeable by Week 6, significant by Week 10</li>
+        </ul>
+      </div>
+      <div class="info-box">
+        <h4>⚠️ APT Warning Signs</h4>
+        <ul>
+          <li>Lower back pain during or after runs → APT likely culprit</li>
+          <li>Knee pain on downhills → weak glutes + tight hip flexors</li>
+          <li>"Duck feet" (toes pointing out when running) → hip rotation issue</li>
+          <li>Tightness always in the same hip flexor → check leg stride symmetry</li>
+          <li>If lower back pain persists more than 3 days → see a physio immediately</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== RACE DAY ===== -->
+<div id="raceday" class="race-hero">
+  <div class="hero-eyebrow" style="color:#666;margin-bottom:20px;">⚡ SEPTEMBER 30, 2026 ⚡</div>
+  <h2>RACE DAY</h2>
+  <p>Start slow — first 20km must feel easy. Gel every 40 min. Real food every 20km. Walk 2 min every 10km from km 40 onward. Every step after km 60 is earned. Cross that finish line.</p>
+  <div style="margin-top:40px;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#333;max-width:700px;margin-left:auto;margin-right:auto;border:1px solid #333;">
+    <div style="background:#1a1a1a;padding:20px;text-align:center;">
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:32px;font-weight:900;color:white;">KM 0–40</div>
+      <div style="font-size:11px;color:#777;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-top:4px;">7:00–7:10/km</div>
+      <div style="font-size:12px;color:#aaa;margin-top:8px;">Deliberately slow. Let faster runners go. Eat at km 10.</div>
+    </div>
+    <div style="background:#1a1a1a;padding:20px;text-align:center;">
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:32px;font-weight:900;color:var(--accent);">KM 40–75</div>
+      <div style="font-size:11px;color:#777;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-top:4px;">6:50–7:00/km</div>
+      <div style="font-size:12px;color:#aaa;margin-top:8px;">Find rhythm. Stay conservative. It starts to hurt — expected.</div>
+    </div>
+    <div style="background:#1a1a1a;padding:20px;text-align:center;">
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:32px;font-weight:900;color:white;">KM 75–100</div>
+      <div style="font-size:11px;color:#777;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-top:4px;">Whatever you have</div>
+      <div style="font-size:12px;color:#aaa;margin-top:8px;">Walk 2 min every 5km. Caffeine gels. Leave it all on the course.</div>
+    </div>
+  </div>
+  <div style="margin-top:40px;font-size:13px;color:#555;max-width:500px;margin-left:auto;margin-right:auto;">
+    You put in 106 days of work. You ran 60km in training. You trained your gut, your glutes, your legs, your mind. Now go collect what's yours.
+  </div>
+</div>
+
+</body>
+</html>
