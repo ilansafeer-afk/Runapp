@@ -8,18 +8,32 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository Code
+      - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Build Web to APK
-        uses: lowcarbrob/action-home-app@v1.1
+      - name: Set up Java
+        uses: actions/setup-java@v4
         with:
-          app-name: "RunApp"
-          activity-name: "MainActivity"
-          package-name: "com.ilansafeer.runapp"
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install Cordova CLI
+        run: npm install -g cordova
+
+      - name: Create App Package
+        run: |
+          cordova create build_dir com.ilansafeer.runapp "Run App"
+          rm -rf build_dir/www/*
+          cp -r * build_dir/www/ || true
+          cd build_dir
+          cordova platform add android
+          cordova build android --device
 
       - name: Save APK File
         uses: actions/upload-artifact@v4
         with:
           name: Run-App-APK
-          path: ./*.apk
+          path: build_dir/platforms/android/app/build/outputs/apk/debug/app-debug.apk
